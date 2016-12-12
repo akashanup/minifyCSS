@@ -2,7 +2,7 @@
 <?php
 	$css = "";
 	$minifiedCss = "";
-	$myfile = fopen($argv[1], "r") or die("Unable to open file!");
+	$myfile = fopen($argv[1], "r") or exit("Unable to open ".$argv[1].PHP_EOL);
 	while(!feof($myfile)) 
 	{
 	  $css .= fgetc($myfile);
@@ -33,7 +33,7 @@
 
 	$path = "/var/www/html/minifyCSS/minifiedCss.css";
 	
-	$myfile = fopen($path, "w+") or die("Unable to open file!");
+	$myfile = fopen($path, "w+") or exit("You do not have write permission for ".$path.PHP_EOL);
 	fwrite($myfile, $minifiedCss."\n");
 	fclose($myfile);
 ?>
