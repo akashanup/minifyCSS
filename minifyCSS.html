@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title>Minify CSS</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    	<section>
+    		<section id="cssSection">
+    			<h2>
+    				Write your CSS
+    			</h2>
+    			<textarea id="css" cols='89' rows='10'></textarea>
+    		</section>
+    		<section>
+    			<button id="minifyCSSBtn" onclick="minifyCSS();">Minify CSS</button>
+    		</section>
+    		<br>
+    		<section id="minifiedCssSection" style="max-height:300px;max-width:650px;overflow-y: scroll;">
+    		</section>
+    	</section>
+    	<script type="text/javascript">
+    		function minifyCSS()
+    		{
+    			var css 				=	document.getElementById("css").value.trim();
+    			css 					=	css.replace(/\s+/g, '');//console.log(css.replace(/\s+/g, ''));
+    			var minifiedCssSection 	=	document.getElementById("minifiedCssSection");
+    			var minifiedCss 		=	"";
+
+    			for (var i = 0; i < css.length; i++) 
+    			{
+    				if(css.charAt(i) == '/' && css.charAt(i+1) == '*')
+    				{
+    					i = i + 2;
+    					for (var j = 0; j < css.length; j++) 
+    					{	
+    						if(css.charAt(i) == '*' && css.charAt(i+1) == '/')
+    						{
+    							i++;
+    							break;
+    						}
+    						i++;
+    					};
+    				}
+    				else
+    				{
+    					minifiedCss += css.charAt(i); 
+    				}
+    			};
+    			minifiedCssSection.style.border 	=	"thin solid #0000FF";
+    			minifiedCssSection.innerHTML    	=	minifiedCss;    		}
+    	</script>
+    </body>
+</html>
+
